@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="WePray.Views.MusicDetail">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout Padding="40" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ImageButton Source="{Binding Image}" HeightRequest="200" WidthRequest="200" BackgroundColor="Transparent"/>
+                <Label Text="{Binding Songtitle,Mode=TwoWay}" TextColor="Black" FontSize="25" Style="{StaticResource TitleLabel}" HorizontalTextAlignment="Center" Margin="0,20,0,10"/>
+                <Label Text="{Binding Artist, Mode=TwoWay}" TextColor="Black" FontSize="20" Style="{StaticResource otherLabel}" HorizontalTextAlignment="Center"/>
+                <BoxView HeightRequest="1" BackgroundColor="#e7e7e7" Margin="-20,10"/>
+            </StackLayout>
+            <ImageButton Source="playbutton" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.45,0.95,0.055,0.055" AbsoluteLayout.LayoutFlags="All" Command="{Binding play}" IsVisible="{Binding isPaused}" IsEnabled="{Binding isPaused}"/>
+            <ImageButton Source="pausebutton" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.45,0.95,0.055,0.055" AbsoluteLayout.LayoutFlags="All" Command="{Binding Pause}" IsVisible="{Binding isPlaying}" IsEnabled="{Binding isPlaying}"/>
+            <ActivityIndicator  AbsoluteLayout.LayoutBounds="0.45,0.958,0.06,0.07" Color="Black" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding Indicate}" IsRunning="True"/>
+            <ImageButton Source="Sharebutton" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.95,0.95,0.1,0.1" AbsoluteLayout.LayoutFlags="All" Command="{Binding Share}"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

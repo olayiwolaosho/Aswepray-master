@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage  xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:WePray.Views.Swipe"
+                  mc:Ignorable="d"
+             x:Class="WePray.ViewModels.Base.BibleReferencePopup">
+    
+
+    <!--<AbsoluteLayout HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="600" WidthRequest="450" BackgroundColor="White"> AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"-->
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="500" WidthRequest="450" BackgroundColor="White">
+            <Label Text="Bible Reference" TextColor="Black" FontSize="20" FontAttributes="Bold" Padding="5"/>
+            <SearchBar Placeholder="Search" BackgroundColor="#e7e7e7" TextChanged="SearchBar_TextChanged"/>
+            <StackLayout BackgroundColor="#FFFFFF">
+
+                <Frame HasShadow="True" Padding="0">
+                    <StackLayout>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+
+                            <StackLayout Grid.Column="0"  Padding="0" HeightRequest="50">
+
+                                <StackLayout.GestureRecognizers>
+
+                                    <TapGestureRecognizer Command="{Binding OnSelectTaps}" CommandParameter="books"></TapGestureRecognizer>
+
+                                </StackLayout.GestureRecognizers>
+
+                                <FlexLayout Direction="Column" JustifyContent="Center" HorizontalOptions="Center" AlignContent="Center" AlignItems="Center">
+                                    <Label Text="Books" FontSize="14"  FontAttributes="Bold" TextColor="#000000"/>
+                                    <Frame  Padding="1" BackgroundColor="Accent" WidthRequest="120" IsVisible="{Binding BooksStack}"></Frame>
+                                </FlexLayout>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="1"  Padding="0" HeightRequest="50">
+
+                                <StackLayout.GestureRecognizers>
+
+                                    <TapGestureRecognizer Command="{Binding OnSelectTaps}" CommandParameter="chapters"></TapGestureRecognizer>
+
+                                </StackLayout.GestureRecognizers>
+
+                                <FlexLayout Direction="Column" JustifyContent="Center" HorizontalOptions="Center" AlignContent="Center" AlignItems="Center">
+                                    <Label Text="Chapters" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#000000" />
+                                    <Frame Padding="1" BackgroundColor="Accent" WidthRequest="120" IsVisible="{Binding ChaptersStack}"></Frame>
+                                </FlexLayout>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="2" Padding="0" HeightRequest="50">
+
+                                <StackLayout.GestureRecognizers>
+
+                                    <TapGestureRecognizer Command="{Binding OnSelectTaps}" CommandParameter="verses"></TapGestureRecognizer>
+
+                                </StackLayout.GestureRecognizers>
+
+                                <FlexLayout Direction="Column" JustifyContent="Center" HorizontalOptions="Center" AlignContent="Center" AlignItems="Center">
+                                    <Label Text="Verses" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#000000"  />
+                                    <Frame Padding="1" BackgroundColor="Accent" WidthRequest="120" IsVisible="{Binding VersesStack}"></Frame>
+                                </FlexLayout>
+                            </StackLayout>
+
+                        </Grid>
+
+                    </StackLayout>
+
+                </Frame>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding BooksStack}" Padding="10">
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding LoadingSign}">
+                    <Label Text="Loading Bible..." FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <ActivityIndicator IsRunning="True" Color="Accent"/>
+                </StackLayout>
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding NoNetwork}">
+                    <Label Text="Please connect to Mobiledata/Wifi" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <!--<local:SwipeContainer Swipe="OnSwiped" >-->
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+                <CollectionView x:Name="BibleCollecitonView"
+                ItemsSource="{Binding Biblebooks}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackLayout Padding="15">
+                                    <Label Text="{Binding Name}" 
+                                Style="{StaticResource TitleLabel}" 
+                                FontSize="16"/>
+                                    <Label Text="{Binding NameLong}" 
+                                d:Text="Item descripton"
+                               LineBreakMode="TailTruncation"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="14" />
+                                    <!--<StackLayout.GestureRecognizers>
+                                        <SwipeGestureRecognizer Direction="Left" Swiped="ONSwiped" CommandParameter="Left"/>
+                                    </StackLayout.GestureRecognizers>-->
+                                </StackLayout>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+               
+            </RefreshView>
+            <!--</local:SwipeContainer>-->
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding ChaptersStack}" Padding="10">
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding NoBookPicked}">
+                    <Label Text="Please Pick A bible book" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding ChapNoNetwork}">
+                    <Label Text="Please connect to Mobiledata/Wifi" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+                <CollectionView
+                ItemsSource="{Binding Biblebookchapters}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                        Span="6" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackLayout Padding="15">
+                                    <Label Text="{Binding Number}" 
+                                Style="{StaticResource TitleLabel}" 
+                                FontSize="14"/>
+                                    <!--<StackLayout.GestureRecognizers>
+                                        <SwipeGestureRecognizer Direction="Left,Right" Swiped="ONSwiped" CommandParameter="ChapterLeft"/>
+                                        <SwipeGestureRecognizer Direction="Left,Right" Swiped="ONSwiped" CommandParameter="ChapterRight"/>
+                                    </StackLayout.GestureRecognizers>-->
+                                </StackLayout>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped_1"  CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                   
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+
+            <StackLayout IsVisible="{Binding VersesStack}" Padding="10">
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding LoadingVerseSign}">
+                    <Label Text="Loading Bible..." FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <ActivityIndicator IsRunning="True" Color="Accent"/>
+                </StackLayout>
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+                <CollectionView
+                ItemsSource="{Binding Bibleverses}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                        Span="5" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackLayout Padding="15">
+                                    <Label Text="{Binding Number}" 
+                                Style="{StaticResource TitleLabel}" 
+                                FontSize="14"/>
+                                    <!--<StackLayout.GestureRecognizers>
+                                        <SwipeGestureRecognizer Direction="Right" Swiped="ONSwiped" CommandParameter="Right"/>
+                                    </StackLayout.GestureRecognizers>-->
+                                </StackLayout>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped_2" CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+        </StackLayout>
+        <!--<ImageButton Source="Sharebutton" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.95,0.95,0.1,0.1" AbsoluteLayout.LayoutFlags="All" Command="{Binding Share}"/>-->
+    <!--</AbsoluteLayout>-->
+</popup:PopupPage>

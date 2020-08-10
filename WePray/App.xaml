@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="WePray.App">
+    <Application.Resources>
+        <!-- FONTS -->
+        <OnPlatform x:Key="RobotoBold"
+                        x:TypeArguments="x:String">
+            <On Platform="Android,iOS" Value="Roboto-Bold.ttf"/>
+        </OnPlatform>
+        
+        <OnPlatform x:Key="RobotoRegular"
+                        x:TypeArguments="x:String">
+            <On Platform="Android,iOS" Value="Roboto-Regular.ttf"/>
+        </OnPlatform>
+        
+        <OnPlatform x:Key="RobotoMedium"
+                        x:TypeArguments="x:String">
+            <On Platform="Android,iOS" Value="Roboto-Medium.ttf"/>
+        </OnPlatform>
+        
+        <Style TargetType="{x:Type Label}" x:Key="TitleLabel">
+            <Setter Property="FontFamily" Value="{StaticResource RobotoBold}"/>
+        </Style>
+        
+        <Style TargetType="{x:Type Label}" x:Key="DateLabel">
+            <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}"/>
+        </Style> 
+        
+        <Style TargetType="{x:Type Label}" x:Key="otherLabel">
+            <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}"/>
+        </Style>
+    </Application.Resources>
+</Application>

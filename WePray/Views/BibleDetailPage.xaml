@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="clr-namespace:WePray.Views.Ads"
+             mc:Ignorable="d"
+             x:Class="WePray.Views.BibleDetailPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Label}" x:Key="headerlabel">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid Padding="25" RowDefinitions="Auto,Auto,Auto">
+            <StackLayout BackgroundColor="#0f1ea5" HeightRequest="70" Margin="-25,-25,-25,15" Orientation="Horizontal" Grid.Row="0">
+                <StackLayout Orientation="Horizontal" Margin="35,20,20,0">
+                    <Label Text="{Binding Curbible}" Style="{StaticResource headerlabel}"/>
+                    <Image Source="darrow" HeightRequest="15" Margin="0,0,0,5"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PopBible}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="20,20,20,0">
+                    <Label Text="{Binding BVersion}" Style="{StaticResource headerlabel}"/>
+                    <Image Source="darrow"  HeightRequest="15" Margin="0,0,0,5"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PopBibleVersion}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+            <controls:AdControlView Grid.Row="1" Size="SmartBannerPortrait" HeightRequest="70"/>
+            <ScrollView  Grid.Row="2" Margin="0,-22,0,0">
+                <StackLayout>
+                    <Label x:Name="Blabel" Text="{Binding Bible}" FontSize="23" LineHeight="1.2" FormattedText="{Binding Format,Mode=TwoWay}" Style="{StaticResource DateLabel}" TextColor="Black"/>
+                    <controls:AdControlView  Size="SmartBannerPortrait" HeightRequest="75"/>
+                    <controls:AdControlView  Size="SmartBannerPortrait" HeightRequest="75"/>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="clr-namespace:WePray.Views.Ads"
+             mc:Ignorable="d"
+             x:Class="WePray.Views.PrayerDetail"
+             Title="Prayer">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior 
+            Command="{Binding navback}"/>
+    </Shell.BackButtonBehavior>
+    
+    <ContentPage.Content>
+        <AbsoluteLayout>
+           
+            <StackLayout Padding="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ImageButton Source="{Binding Image}" HeightRequest="110" WidthRequest="110" BackgroundColor="Transparent"/>
+                <Label Text="{Binding Title,Mode=TwoWay}" TextColor="Black"  FontSize="30" Style="{StaticResource TitleLabel}" HorizontalTextAlignment="Center"/>
+                <BoxView HeightRequest="1" BackgroundColor="#e7e7e7" Margin="-20,5"/>
+                <Label Text="{Binding strDate}" TextColor="Black"  FontSize="15" Style="{StaticResource DateLabel}" HorizontalTextAlignment="End" Margin="0,0,0,5"/>
+                <ScrollView>
+                    <StackLayout>
+                        <Label Text="{Binding Description, Mode=TwoWay}" TextType="Html" TextColor="Black" FontSize="21" Style="{StaticResource otherLabel}" LineHeight="1.5" FormattedText="{Binding Format, Mode=TwoWay}"/>
+                        <controls:AdControlView  Size="SmartBannerPortrait" HeightRequest="75"/>
+                        <controls:AdControlView  Size="SmartBannerPortrait" HeightRequest="75"/>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+            <controls:AdControlView  Size="SmartBannerPortrait" AbsoluteLayout.LayoutBounds="0.45,0.25,1,0.10" AbsoluteLayout.LayoutFlags="SizeProportional"/>
+            <ImageButton Source="playbutton" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.45,0.95,0.1,0.1" AbsoluteLayout.LayoutFlags="All" Command="{Binding play}" IsVisible="{Binding isPaused}" IsEnabled="{Binding isPaused}"/>
+            <ImageButton Source="pausebutton" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.45,0.95,0.1,0.1" AbsoluteLayout.LayoutFlags="All" Command="{Binding Pause}" IsVisible="{Binding isPlaying}" IsEnabled="{Binding isPlaying}"/>
+            <ActivityIndicator  AbsoluteLayout.LayoutBounds="0.45,0.95,0.1,0.1" Color="Black" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding Indicate}" IsRunning="True"/> <!---->
+            <ImageButton Source="Sharebutton" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds="0.95,0.95,0.2,0.1" AbsoluteLayout.LayoutFlags="All" Command="{Binding Share}"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

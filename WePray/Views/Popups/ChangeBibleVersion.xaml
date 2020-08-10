@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage  xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="WePray.Views.Popups.ChangeBibleVersion">
+
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="500" WidthRequest="450" BackgroundColor="White">
+        <StackLayout>
+            <Label Text="Bible Versions" TextColor="Black" FontSize="20" FontAttributes="Bold" Padding="5"/>
+        </StackLayout>
+        <SearchBar TextChanged="SearchBar_TextChanged" Placeholder="Search for version" PlaceholderColor="White" BackgroundColor="#0f1ea5"/>
+
+        <ActivityIndicator IsVisible="{Binding Actind}" IsRunning="True" Color="Accent"/>
+        <Label Text="Please Connect to Internet to Change Version" IsVisible="{Binding Nointernet}" TextColor="Black"/>
+        <CollectionView x:Name="BibleCollecitonView"
+                ItemsSource="{Binding Bibleversions}" IsEnabled="{Binding Enable}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackLayout Padding="15">
+                            <Label Text="{Binding AbbreviationLocal}" 
+                                Style="{StaticResource TitleLabel}" 
+                                FontSize="16"/>
+                            <Label Text="{Binding Name}" 
+                                d:Text="Item descripton"
+                               LineBreakMode="TailTruncation"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="14" />
+                        </StackLayout>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"  CommandParameter="{Binding .}"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+    
+</popup:PopupPage>
