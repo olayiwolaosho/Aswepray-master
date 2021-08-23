@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage  xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                  xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:fontAwesome="clr-namespace:WePray.Helpers" 
+                  xmlns:animations="http://rotorgames.com"
+                  x:Class="WePray.Views.Popups.UpdateModal">
+    <popup:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </popup:PopupPage.Animation>
+
+    <Frame BackgroundColor="White" HeightRequest="240" WidthRequest="350" VerticalOptions="Center" 
+        HorizontalOptions="Center" CornerRadius="20">
+        <StackLayout Spacing="15">
+            <ImageButton HorizontalOptions="End" BackgroundColor="Transparent" Clicked="CancleClicked">
+                <ImageButton.Source>
+                    <FontImageSource FontFamily="Life" Glyph="{x:Static fontAwesome:Fonticons.Times}" Color="Black"/>
+                </ImageButton.Source>
+            </ImageButton>
+            <Label Text="Dear user" Style="{StaticResource PopupLabel}"/>
+            <Label Text="The wepray version is too old you need to upgrade to the latest version in order to enjoy the apps experience " Style="{StaticResource otherLabel}"/>
+            <Button Text="UPGRADE" TextColor="White" BackgroundColor="{StaticResource PrimaryColor}" Clicked="UpdateClicked"/>
+        </StackLayout>
+    </Frame>
+    
+    
+    
+</popup:PopupPage>

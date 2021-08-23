@@ -17,9 +17,11 @@ namespace WePray
         public App()
         {
             InitializeComponent();
-
+            
             DependencyService.Get<ILocalNotificationService>().LocalNotification("Daily Prayer", "Dont forget to pray today", 0, DateTime.Now.AddHours(30 - DateTime.Now.Hour));
-            DependencyService.Register<IAudio>();
+            //DependencyService.Register<IAudio>();
+            Akavache.Registrations.Start("Aswepray");
+            /*
             if (!Preferences.ContainsKey("BibleID"))
             {
                 Preferences.Set("Bversion", "NIV");
@@ -28,6 +30,7 @@ namespace WePray
                 Preferences.Set("ChapterPicked", "1");
                 Preferences.Set("BookChapter", "GEN 1");
             }
+            */
             Preferences.Set("TodaysDate", DateTime.Now.Date);
             MainPage = new AppShell();
         }

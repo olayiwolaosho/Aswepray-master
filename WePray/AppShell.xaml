@@ -14,20 +14,19 @@
     <Shell.Resources>
         <ResourceDictionary>
 
-            <Color x:Key="NavigationPrimary">#0f1ea5</Color>
-            
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            
         </ResourceDictionary>
     </Shell.Resources>
 
@@ -36,12 +35,12 @@
         <Tab Title="Daily Prayers" Icon="pray.png">
             <ShellContent ContentTemplate="{DataTemplate local:DailyPrayer}" />
         </Tab>
-        <Tab Title="Bible" Icon="bible.png">
+        <!--<Tab Title="Bible" Icon="bible.png">
             <ShellContent ContentTemplate="{DataTemplate local:BibleDetailPage}"/>
-        </Tab> 
+        </Tab>-->
         <!--<Tab Title="Songs" Icon="tab_feed.png">
             <ShellContent ContentTemplate="{DataTemplate local:MusicPage}" />
-        </Tab> -->
+        </Tab>--> 
     </TabBar>
 
     <!-- Optional Templates 

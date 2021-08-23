@@ -87,6 +87,9 @@ namespace WePrayWPResponseObject
         [JsonProperty("_links")]
         public Links Links { get; set; }
 
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
     }
 
     public partial class Content

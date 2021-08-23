@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WePray.DependencyInject;
 using WePray.ViewModels;
 using WePray.ViewModels.Base;
 using Xamarin.Essentials;
@@ -19,12 +20,12 @@ namespace WePray.Views
         public BibleDetailPage()
         {
             InitializeComponent();
-            BindingContext = BDVM = new BibleDetailViewModel();
+            BindingContext = BDVM = Resolver.Resolve<BibleDetailViewModel>();
 
             MessagingCenter.Send(this, "LoadBible");
             MessagingCenter.Subscribe<BibleReferencePopup>(this, "LoadBible", (sender) =>
             {
-                BindingContext = BDVM = new BibleDetailViewModel();
+                BindingContext = BDVM = Resolver.Resolve<BibleDetailViewModel>();
                 Blabel.FormattedText = BDVM.Format;
             });
         }
@@ -39,7 +40,7 @@ namespace WePray.Views
                    await Navigation.PushPopupAsync(new BibleReferencePopup());
                     break;
                 case true:
-                    BindingContext = BDVM = new BibleDetailViewModel();
+                    BindingContext = BDVM = Resolver.Resolve<BibleDetailViewModel>();
                     Blabel.FormattedText = BDVM.Format;
                     break;
             }

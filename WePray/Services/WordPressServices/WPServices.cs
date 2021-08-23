@@ -13,7 +13,7 @@ using WordPressPCL.Models;
 
 namespace WePray.Services.WordPressServices
 {
-    class WPServices : IWPServices
+    public class WPServices : IWPServices
     {
         IRequestProvider requestProvider;
         public WPServices()
@@ -38,6 +38,13 @@ namespace WePray.Services.WordPressServices
         {
 
             IEnumerable<TResult> allbibles = await requestProvider.GetAsync<IEnumerable<TResult>>(Constants.GetallWPSongs);
+            return allbibles;
+        }
+        
+        public async Task<TResult> GetTagName<TResult>()
+        {
+
+            TResult allbibles = await requestProvider.GetAsync<TResult>(Constants.GetcategorybyId);
             return allbibles;
         }   
         

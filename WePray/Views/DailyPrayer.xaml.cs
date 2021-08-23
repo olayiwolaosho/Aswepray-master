@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WePray.DependencyInject;
 using WePray.Models;
 using WePray.ViewModels;
 using Xamarin.Essentials;
@@ -19,9 +20,12 @@ namespace WePray.Views
         public DailyPrayer()
         {
             InitializeComponent();
-            BindingContext = DPVM =new DailyPrayerViewModel(this.Navigation);
+            BindingContext = DPVM = Resolver.Resolve<DailyPrayerViewModel>();
         }
 
+        /// <summary>
+        /// Get all prayers when the content page appears to reduce the amonut of work being don on page creation this helps the smoth app flow 
+        /// </summary>
         protected async override void OnAppearing()
         {
             base.OnAppearing();
@@ -46,7 +50,6 @@ namespace WePray.Views
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             ItemsCollectionView.ItemsSource = DPVM.Prayers.Where(c => c.Title.ToUpper().Contains(e.NewTextValue) || c.Title.ToLower().Contains(e.NewTextValue));
-
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WePray.DependencyInject;
 using WePray.Models;
 using WePray.ViewModels;
 using Xamarin.Essentials;
@@ -20,7 +21,7 @@ namespace WePray.Views
         {
             InitializeComponent();
 
-            BindingContext = MVM = new MusicViewModel(this.Navigation);
+            BindingContext = MVM = Resolver.Resolve<MusicViewModel>();
         }
 
         protected async override void OnAppearing()

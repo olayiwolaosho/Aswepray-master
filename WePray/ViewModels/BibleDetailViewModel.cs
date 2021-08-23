@@ -7,8 +7,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using WePray.Repository;
 using WePray.Services;
 using WePray.Services.BibleServices;
+using WePray.Services.Connection;
 using WePray.Services.RequestProviders;
 using WePray.ViewModels.Base;
 using WePray.ViewModels.PopupViewModel;
@@ -33,7 +35,7 @@ namespace WePray.ViewModels
         }
         private ObservableCollection<WePrayGetVersesandContent.ContentItem> biblechaptersverses;
 
-        public BibleDetailViewModel()
+        public BibleDetailViewModel(IConnection connection, IRepository repository) : base(connection,repository)
         {
             CreateContent();
             Curbible = Preferences.Get("BookChapter", null);

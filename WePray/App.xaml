@@ -6,6 +6,10 @@
              mc:Ignorable="d"
              x:Class="WePray.App">
     <Application.Resources>
+
+        <Color x:Key="PrimaryColor">#0f1ea5</Color>
+
+
         <!-- FONTS -->
         <OnPlatform x:Key="RobotoBold"
                         x:TypeArguments="x:String">
@@ -21,7 +25,9 @@
                         x:TypeArguments="x:String">
             <On Platform="Android,iOS" Value="Roboto-Medium.ttf"/>
         </OnPlatform>
-        
+
+
+        <!-- FONTS -->
         <Style TargetType="{x:Type Label}" x:Key="TitleLabel">
             <Setter Property="FontFamily" Value="{StaticResource RobotoBold}"/>
         </Style>
@@ -32,6 +38,12 @@
         
         <Style TargetType="{x:Type Label}" x:Key="otherLabel">
             <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}"/>
+        </Style>
+        
+        <Style TargetType="{x:Type Label}" x:Key="PopupLabel">
+            <Setter Property="FontFamily" Value="{StaticResource RobotoBold}"/>
+            <Setter Property="TextColor"  Value="#202020"/>
+            <Setter Property="FontSize"  Value="22"/>
         </Style>
     </Application.Resources>
 </Application>

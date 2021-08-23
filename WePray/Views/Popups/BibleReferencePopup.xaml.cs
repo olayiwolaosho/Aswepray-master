@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WePray.DependencyInject;
 using WePray.ViewModels.PopupViewModel;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Markup;
 using Xamarin.Forms.Xaml;
 
 namespace WePray.ViewModels.Base
@@ -19,7 +19,7 @@ namespace WePray.ViewModels.Base
         public BibleReferencePopup()
         {
             InitializeComponent();
-            BindingContext = BRPV = new BibleRefPopupViewmodel();
+            BindingContext = BRPV = Resolver.Resolve<BibleRefPopupViewmodel>(); 
         }
 
         protected async override void OnAppearing()

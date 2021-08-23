@@ -9,6 +9,23 @@ namespace WePray.ViewModels.Base
 {
     public abstract class ExtendedBindableObject : BindableObject
     {
+
+        private bool _isBusy;
+
+        public bool IsBusy
+        {
+            get
+            {
+                return _isBusy;
+            }
+
+            set
+            {
+                _isBusy = value;
+                RaisePropertyChanged(() => IsBusy);
+            }
+        }
+
         public void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {
             var name = GetMemberInfo(property).Name;

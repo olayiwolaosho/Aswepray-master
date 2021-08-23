@@ -5,6 +5,8 @@ using System.Text;
 using System.Windows.Input;
 using WePray.Dependencies;
 using WePray.Models;
+using WePray.Repository;
+using WePray.Services.Connection;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -13,7 +15,7 @@ namespace WePray.ViewModels
     class MusicDetailViewModel : BaseViewModel
     {
         string content;
-        public MusicDetailViewModel()
+        public MusicDetailViewModel(IConnection connection, IRepository repository) : base(connection, repository)
         {
             if (Preferences.ContainsKey("musicjsnstr"))
             {

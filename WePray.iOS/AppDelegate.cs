@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using WePray.iOS.DependencyInject;
 
 namespace WePray.iOS
 {
@@ -25,6 +26,7 @@ namespace WePray.iOS
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             Rg.Plugins.Popup.Popup.Init();
             global::Xamarin.Forms.Forms.Init();
+            Bootstrapper.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

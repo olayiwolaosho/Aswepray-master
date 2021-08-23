@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using WePray.AllConstants;
 using WePray.Models;
+using WePray.Repository;
+using WePray.Services.Connection;
 using WePray.Services.WordPressServices;
 using WePrayWPResponseObject;
 using WordPressPCL;
@@ -24,9 +26,8 @@ namespace WePray.ViewModels
         INavigation navigation;
         IWPServices wPServices;
 
-        public MusicViewModel(INavigation navigation)
+        public MusicViewModel(IConnection connection, IRepository repository) : base(connection, repository)
         {
-            this.navigation = navigation;
             wPServices = new WPServices();
            
         }

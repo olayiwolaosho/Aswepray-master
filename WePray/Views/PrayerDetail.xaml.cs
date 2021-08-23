@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WePray.DependencyInject;
 using WePray.Models;
 using WePray.ViewModels;
 using Xamarin.Forms;
@@ -20,7 +21,7 @@ namespace WePray.Views
         public PrayerDetail()
         {
             InitializeComponent();
-            BindingContext = PDVM = new PrayerDetailViewModel();
+            BindingContext = PDVM = Resolver.Resolve<PrayerDetailViewModel>();
         }
 
         protected override bool OnBackButtonPressed()

@@ -11,7 +11,7 @@ namespace WePray
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(MusicDetail), typeof(MusicDetail));
+            //Routing.RegisterRoute(nameof(MusicDetail), typeof(MusicDetail));
             Routing.RegisterRoute(nameof(BibleDetailPage), typeof(BibleDetailPage));
         }
     }

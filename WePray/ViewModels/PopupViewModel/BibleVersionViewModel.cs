@@ -8,8 +8,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WePray.Repository;
 using WePray.Services;
 using WePray.Services.BibleServices;
+using WePray.Services.Connection;
 using WePray.Services.RequestProviders;
 using WePrayGetVersesandContent;
 using Xamarin.Essentials;
@@ -40,7 +42,7 @@ namespace WePray.ViewModels.PopupViewModel
         }
         private ObservableCollection<WePrayGetVersesandContent.ContentItem> biblechaptersverses;
 
-        public BibleVersionViewModel()
+        public BibleVersionViewModel(IConnection connection, IRepository repository) : base(connection, repository)
         {
             bibleService = new BibleService(new RequestProvider());
             Checkwifionstart();

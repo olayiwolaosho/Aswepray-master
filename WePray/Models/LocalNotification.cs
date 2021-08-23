@@ -15,5 +15,6 @@ namespace WePray.Models
         public int IconId { get; set; }
 
         public DateTime NotifyTime { get; set; }
+
     }
 }

@@ -23,13 +23,17 @@ namespace WePray.AllConstants
 
         //WordPress
 
-        public static string Image_Url = "https://wambamusictalent.com.ng/wp-json/wp/v2/media/";
-        public static string BaseWP_Url = "https://wambamusictalent.com.ng/wp-json/";
+        public static string Image_Url = "https://wepray.com.ng/wp-json/wp/v2/media/";
+        public static string BaseWP_Url = "https://wepray.com.ng/wp-json/";
         public static string GetallWPposts = BaseWP_Url + "wp/v2/posts?context=view&orderby=date";
-        public static string GetallWPSongs = BaseWP_Url + "wp/v2/posts?orderby=date&categories=2";
-        public static string GetallWPPrayers = BaseWP_Url + "wp/v2/posts?orderby=date&categories=1";
+        public static string GetallWPSongs = BaseWP_Url + "wp/v2/posts?&per_page=20&orderby=date&categories=6";
+        public static string GetallWPPrayers = BaseWP_Url + "wp/v2/posts?&per_page=20&orderby=date&categories=4";
 
 
+        /// <summary>
+        /// currently we are getting just the category of version number
+        /// </summary>
+        public static string GetcategorybyId = BaseWP_Url + $"wp/v2/categories/{6}";
 
 
     }

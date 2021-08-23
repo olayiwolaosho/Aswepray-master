@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WePray.DependencyInject;
 using WePray.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,7 +16,7 @@ namespace WePray.Views
         public MusicDetail()
         {
             InitializeComponent();
-            BindingContext = new MusicDetailViewModel();
+            BindingContext =  Resolver.Resolve<MusicDetailViewModel>();
         }
     }
 }

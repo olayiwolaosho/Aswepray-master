@@ -36,7 +36,7 @@
                                     <StackLayout Padding="10" Grid.Column="1">
                                         <Label Text="{Binding Title}" 
                                 Style="{StaticResource TitleLabel}" 
-                                FontSize="17"/>
+                                FontSize="17" TextType="Html"/>
                                         <Label TextType="Html" Text="{Binding Description}" 
                                 d:Text="Item descripton"
                                LineBreakMode="TailTruncation"

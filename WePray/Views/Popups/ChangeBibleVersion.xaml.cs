@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WePray.DependencyInject;
 using WePray.ViewModels.Base;
 using WePray.ViewModels.PopupViewModel;
 using Xamarin.Forms;
@@ -18,7 +19,7 @@ namespace WePray.Views.Popups
         public ChangeBibleVersion()
         {
             InitializeComponent();
-            BindingContext = BVVM = new BibleVersionViewModel();
+            BindingContext = BVVM = Resolver.Resolve<BibleVersionViewModel>();
         }
 
         protected async override void OnAppearing()

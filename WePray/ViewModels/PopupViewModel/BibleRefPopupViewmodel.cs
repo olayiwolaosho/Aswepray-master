@@ -8,8 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WePray.Repository;
 using WePray.Services;
 using WePray.Services.BibleServices;
+using WePray.Services.Connection;
 using WePray.Services.RequestProviders;
 using WePrayAllBiblesBooksandChapters;
 using WePrayGetVersesandContent;
@@ -74,7 +76,7 @@ namespace WePray.ViewModels.PopupViewModel
         private ObservableCollection<WePrayGetVersesandContent.PurpleAttrs> bibleverses;
 
 
-        public BibleRefPopupViewmodel()
+        public BibleRefPopupViewmodel(IConnection connection, IRepository repository) : base(connection, repository)
         {
           
             bibleService = new BibleService(new RequestProvider());

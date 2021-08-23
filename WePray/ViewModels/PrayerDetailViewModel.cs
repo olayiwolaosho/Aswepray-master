@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WePray.Models;
+using WePray.Repository;
+using WePray.Services.Connection;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -18,7 +20,7 @@ namespace WePray.ViewModels
         string[] strList;
         string content;
         int a = 0;
-        public PrayerDetailViewModel()
+        public PrayerDetailViewModel(IConnection connection, IRepository repository) : base(connection, repository)
         {
             if (Preferences.ContainsKey("jsnstr"))
             {
