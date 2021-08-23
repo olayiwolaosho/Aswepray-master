@@ -91,7 +91,7 @@ namespace WePray.ViewModels
                     ActSeen = false;
                     await UpdateApp();
                 }
-                catch (Exception e)
+                catch ()
                 {
                     ActSeen = false;
                     await Application.Current.MainPage.DisplayAlert("No internet connection", "Please connect to the internet", "ok");
