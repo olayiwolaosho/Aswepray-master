@@ -6,6 +6,7 @@ using WePray.Views;
 using Xamarin.Essentials;
 using WePray.Dependencies;
 using WePray.Services.GeneralServices;
+using Akavache;
 
 namespace WePray
 {
@@ -41,6 +42,7 @@ namespace WePray
 
         protected override void OnSleep()
         {
+            BlobCache.Shutdown().Wait();
         }
 
         protected override void OnResume()

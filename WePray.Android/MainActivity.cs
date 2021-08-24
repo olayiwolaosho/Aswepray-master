@@ -12,7 +12,7 @@ using WePray.Droid.DependencyInject;
 
 namespace WePray.Droid
 {
-    [Activity(Label = "WePray", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, LaunchMode = LaunchMode.SingleTop)]
+    [Activity(Theme = "@style/MainTheme", MainLauncher = false)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

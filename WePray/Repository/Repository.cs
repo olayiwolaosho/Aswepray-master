@@ -20,8 +20,18 @@ namespace WePray.Repository
     public class Repository : IRepository
     {
 
+        string _prayercachekey = "DailyPrayers";
+
         IConvertModel _convertModel;
+
         ObservableCollection<Prayer> _prayercollection = new ObservableCollection<Prayer>();
+
+
+
+        DateTimeOffset CacheExpiry { get { return DateTime.Now.Add(TimeSpan.FromDays(1)); } }
+
+
+
 
         public Repository(IConvertModel convertModel)
         {
@@ -30,67 +40,69 @@ namespace WePray.Repository
 
 
         /// <summary>
-        /// Gets the Daily Prayer from IconvertModelThis will still be worked on Need to make everything generic 
-        /// </summary>
-        /// <returns></returns>
-        private async Task<ObservableCollection<Prayer>> GetconvertModelsPrayer()
-        {
-            var DailyPrayers = await _convertModel.ConvertAllWPResponseObjectToPrayers();
-            return DailyPrayers;
-        }
-
-
-        /// <summary>
-        /// Stores the Daily Prayer from IconvertModel into a blobcach 
-        /// </summary>
-        /// <returns></returns>
-        private async Task StorePrayerInBlob()
-        {
-            var DailyPrayers = await GetconvertModelsPrayer();
-
-            //Adds Daily Prayer to blob cache but is it always successful ?
-            await BlobCache.LocalMachine.InsertObject("DailyPrayers", DailyPrayers,TimeSpan.FromDays(1));
-             
-        }
-
-
-        /// <summary>
-        /// Need to change this it looks too clustered
+        /// Get all prayers from cache/database (Akavache)
         /// </summary>
         /// <returns></returns>
         public async Task<ObservableCollection<Prayer>> GetAllPrayersFromDatabase()
         {
-            var observable = GetObjectSafe<ObservableCollection<Prayer>>(BlobCache.LocalMachine, "DailyPrayers");
-            observable.Subscribe(result => _prayercollection = result);
-            if(_prayercollection != null && _prayercollection.Count != 0)
-            {
-               return _prayercollection;
-            }
-            await StorePrayerInBlob();
-            var allprayers = await BlobCache.LocalMachine.GetObject<ObservableCollection<Prayer>>("DailyPrayers");
-            return allprayers;
+            return await  LoadPrayersFromCache();
+        }
+
+        /// <summary>
+        /// This one is for refresh
+        /// </summary>
+        /// <returns></returns>
+        void RefreshPrayer(ObservableCollection<Prayer> prayers)
+        {
+          
+            BlobCache.LocalMachine.GetAndFetchLatest(_prayercachekey , async () => await GetAllPrayersFromWPwithInvalidate(), null , absoluteExpiration:CacheExpiry)
+                .Subscribe(
+                cachedThenUpdated => 
+                {
+                    prayers = cachedThenUpdated;
+                });
+        }
+
+
+        async Task<ObservableCollection<Prayer>> LoadPrayersFromCache()
+        {
+            return await BlobCache.LocalMachine.GetOrFetchObject(_prayercachekey, GetAllPrayersFromWP, CacheExpiry);
         }
 
 
         /// <summary>
-        /// I'm using this for refresh it would always get data from wordpress and store it in db
+        /// This method gets all prayers from wordpress and wraps it inside an observable which is returned
         /// </summary>
+        /// <returns>IObservable Instance</returns>
+        async Task<ObservableCollection<Prayer>> GetAllPrayersFromWP()
+        {
+             return await _convertModel.ConvertAllWPResponseObjectToPrayers();
+        }
+        
+        /// <summary>
+        /// This method gets all prayers from wordpress and wraps it inside an observable which is returned
+        /// </summary>
+        /// <returns>IObservable Instance</returns>
+        async Task<ObservableCollection<Prayer>> GetAllPrayersFromWPwithInvalidate()
+        {
+            
+             await BlobCache.LocalMachine.InvalidateObject<ObservableCollection<Prayer>>(_prayercachekey);
+            await BlobCache.LocalMachine.Vacuum();
+             return await _convertModel.ConvertAllWPResponseObjectToPrayers();
+        }
+
+
+        /// <summary>
+        /// I'm using this for refresh it would get data from wordpress and store it in db
+        /// </summary>
+        /// <param name="Collectionempty">True if collection is emptu and false if collection is not empty</param>
         /// <returns></returns>
-        public async Task<ObservableCollection<Prayer>> GetAllPrayersFromWP()
+        public void GetPrayersFromWP(ObservableCollection<Prayer> prayers)
         {
-            await StorePrayerInBlob();
-            _prayercollection = await BlobCache.LocalMachine.GetObject<ObservableCollection<Prayer>>("DailyPrayers");
-            return _prayercollection;
+            
+            RefreshPrayer(prayers);
         }
 
-
-        static IDisposable RunObservable(IBlobCache cache, string key)
-        {
-            return GetObjectSafe<Prayer>(cache, key)
-                .Subscribe(
-                    result => Console.WriteLine($"Found value: {result}"),
-                    () => Console.WriteLine("Completed"));
-        }
 
         //Currently I do not know how this really works why are we still using select many ? and what is an IObservable
         // I've named this method in this way because I didn't want to surface a null

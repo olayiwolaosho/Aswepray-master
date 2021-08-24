@@ -52,7 +52,7 @@ namespace WePray.ViewModels
             {
                 IsBusy = true;
 
-                await Setlastdatechecked();
+                Setlastdatechecked();
                 IsBusy = false;
             }
             else
@@ -91,7 +91,7 @@ namespace WePray.ViewModels
                     ActSeen = false;
                     await UpdateApp();
                 }
-                catch ()
+                catch(Exception e)
                 {
                     ActSeen = false;
                     await Application.Current.MainPage.DisplayAlert("No internet connection", "Please connect to the internet", "ok");
@@ -104,9 +104,9 @@ namespace WePray.ViewModels
             
         }
 
-        private async Task Setlastdatechecked()
+        private void Setlastdatechecked()
         {
-            Prayers = await Repository.GetAllPrayersFromWP();
+             Repository.GetPrayersFromWP(Prayers);
         }
 
         

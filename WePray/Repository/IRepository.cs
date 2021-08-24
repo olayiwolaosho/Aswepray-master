@@ -14,6 +14,11 @@ namespace WePray.Repository
     {
         Task<ObservableCollection<Prayer>> GetAllPrayersFromDatabase();
 
-        Task<ObservableCollection<Prayer>> GetAllPrayersFromWP();
+        /// <summary>
+        /// I'm using this for refresh it would get data from wordpress and store it in db
+        /// </summary>
+        /// <param name="Collectionempty">True if collection is emptu and false if collection is not empty</param>
+        /// <returns></returns>
+        void GetPrayersFromWP(ObservableCollection<Prayer> prayers);
     }
 }

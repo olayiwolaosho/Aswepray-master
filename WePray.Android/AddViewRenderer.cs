@@ -50,10 +50,10 @@ namespace WePray.Droid
                         break;
                 }
                 // TODO: change this id to your admob id  
-                //adView.AdUnitId = "ca-app-pub-6179024394686042/7038423825";
+                adView.AdUnitId = "ca-app-pub-6179024394686042/7038423825";
 
                 //This is for testads
-                adView.AdUnitId = "ca-app-pub-3940256099942544/6300978111";
+                //adView.AdUnitId = "ca-app-pub-3940256099942544/6300978111";
                 var requestbuilder = new AdRequest.Builder();
                 adView.LoadAd(requestbuilder.Build());
                 SetNativeControl(adView);

@@ -17,9 +17,13 @@ namespace WePray.Views
     public partial class DailyPrayer : ContentPage
     {
         DailyPrayerViewModel DPVM;
+
+        bool shouldload = false;
+
         public DailyPrayer()
         {
             InitializeComponent();
+            shouldload = true;
             BindingContext = DPVM = Resolver.Resolve<DailyPrayerViewModel>();
         }
 
@@ -29,7 +33,12 @@ namespace WePray.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await DPVM.GetAllPrayers();
+            if (shouldload)
+            {
+                shouldload = false;
+                await DPVM.GetAllPrayers();
+            }
+            
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)

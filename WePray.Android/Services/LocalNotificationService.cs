@@ -39,7 +39,7 @@ namespace WePray.Droid.Services
         public const string MessageKey = "message";
 
         bool channelInitialized = false;
-        int messageId = -1;
+        //int messageId = -1;
         NotificationManager manager;
 
         public void Initialize()

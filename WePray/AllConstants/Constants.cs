@@ -14,11 +14,11 @@ namespace WePray.AllConstants
         public static string OneBible = Base_Url + "bibles/" + BibleId;
         public static string GetEnglishVersion = Base_Url + "bibles?language=Eng";
         public static string AllBiblesVersesandChapters = OneBible + "/books?include-chapters=true&include-chapters-and-sections=false";
-        public static string AllBiblesVersesandContent = OneBible + "/chapters/" + $"{BookChapter}" + "?content-type=json&include-notes=false&include-titles=false&include-chapter-numbers=false&include-verse-numbers=true&include-verse-spans=false";
+        //public static string AllBiblesVersesandContent = OneBible + "/chapters/" + $"{BookChapter}" + "?content-type=json&include-notes=false&include-titles=false&include-chapter-numbers=false&include-verse-numbers=true&include-verse-spans=false";
 
         private static string BibleId => Preferences.Get("BibleID", null);
 
-        private static string BookChapter => Preferences.Get("BookPickedID", null) + "." + Preferences.Get("ChapterPicked", null).ToString();
+        //private static string BookChapter => Preferences.Get("BookPickedID", null) + "." + Preferences.Get("ChapterPicked", null).ToString();
 
 
         //WordPress
