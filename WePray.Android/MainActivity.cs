@@ -11,6 +11,8 @@ using Android.Content;
 using WePray.Droid.DependencyInject;
 using AndroidX.Work;
 using WePray.Droid.Services;
+using Java.Lang;
+using Android.Icu.Util;
 
 namespace WePray.Droid
 {
@@ -31,7 +33,11 @@ namespace WePray.Droid
             Bootstrapper.Init();
             LoadApplication(new App());
 
-            PeriodicWorkRequest taxWorkRequest = PeriodicWorkRequest.Builder.From<NotifyWorker>(TimeSpan.FromMinutes(2)).Build();
+
+            var timeinmilliseconds = GetNotifyTime();
+
+            //This handles the background task and the repeating even when app is killed
+            PeriodicWorkRequest taxWorkRequest = PeriodicWorkRequest.Builder.From<NotifyWorker>(TimeSpan.FromMilliseconds(timeinmilliseconds)).Build();
 
             WorkManager.GetInstance(this).Enqueue(taxWorkRequest);
 
@@ -41,6 +47,15 @@ namespace WePray.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        private long GetNotifyTime()
+        {
+            // Set the alarm to start at approximately 8:00 a.m.
+            Calendar calendar = Calendar.Instance;
+            calendar.TimeInMillis = JavaSystem.CurrentTimeMillis();
+            calendar.Set(CalendarField.HourOfDay, 8);
+            return calendar.TimeInMillis;
         }
 
     }
