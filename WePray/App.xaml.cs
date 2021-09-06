@@ -19,7 +19,7 @@ namespace WePray
         {
             InitializeComponent();
             
-            DependencyService.Get<ILocalNotificationService>().LocalNotification("Daily Prayer", "Dont forget to pray today", 0, DateTime.Now.AddHours(30 - DateTime.Now.Hour));
+           // DependencyService.Get<ILocalNotificationService>().LocalNotification("Daily Prayer", "Dont forget to pray today", 0, DateTime.Now.AddHours(30 - DateTime.Now.Hour));
             //DependencyService.Register<IAudio>();
             Akavache.Registrations.Start("Aswepray");
             /*

@@ -41,7 +41,7 @@ namespace WePray.Views.Popups
             var location = RegionInfo.CurrentRegion.Name.ToLower();
 
             if (Device.RuntimePlatform == Device.Android)
-                url = "https://play.google.com/store/apps/details?id=com.sisystems.Sisystems";
+                url = "https://play.google.com/store/apps/details?id=com.companyname.wepray";
 
             else if (Device.RuntimePlatform == Device.iOS)
                 url = "https://itunes.apple.com/" + location + "/app/contractor-action-solution/id1039202852?mt=8";

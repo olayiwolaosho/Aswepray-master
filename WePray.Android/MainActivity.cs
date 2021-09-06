@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Gms.Ads;
 using Android.Content;
 using WePray.Droid.DependencyInject;
+using AndroidX.Work;
+using WePray.Droid.Services;
 
 namespace WePray.Droid
 {
@@ -28,6 +30,11 @@ namespace WePray.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Bootstrapper.Init();
             LoadApplication(new App());
+
+            PeriodicWorkRequest taxWorkRequest = PeriodicWorkRequest.Builder.From<NotifyWorker>(TimeSpan.FromMinutes(2)).Build();
+
+            WorkManager.GetInstance(this).Enqueue(taxWorkRequest);
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
