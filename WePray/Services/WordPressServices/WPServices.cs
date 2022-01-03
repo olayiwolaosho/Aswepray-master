@@ -16,10 +16,14 @@ namespace WePray.Services.WordPressServices
     public class WPServices : IWPServices
     {
         IRequestProvider requestProvider;
+
+
         public WPServices()
         {
             requestProvider = new RequestProvider();    
         }
+
+
 
         public async Task<TResult> GetAllPosts<TResult>()
         {
@@ -28,11 +32,13 @@ namespace WePray.Services.WordPressServices
             return allbibles;
         }
 
+
         public async Task<IEnumerable<TResult>> GetAllPrayers<TResult>()
         {
             IEnumerable<TResult> allbibles = await requestProvider.GetAsync<IEnumerable<TResult>>(Constants.GetallWPPrayers);
             return allbibles;
         }
+
 
         public async Task<IEnumerable<TResult>> GetAllSongs<TResult>()
         {
@@ -41,6 +47,7 @@ namespace WePray.Services.WordPressServices
             return allbibles;
         }
         
+
         public async Task<TResult> GetTagName<TResult>()
         {
 
@@ -62,6 +69,7 @@ namespace WePray.Services.WordPressServices
         //    return obj;
         //}
 
+
         private static async Task<WordPressClient> GetClient()
         {
             // JWT authentication
@@ -69,6 +77,13 @@ namespace WePray.Services.WordPressServices
             client.AuthMethod = AuthMethod.JWT;
             await client.RequestJWToken("Origin", "V)n!mOd5^^t6)wR6P#rVpWrL");
             return client;
+        }
+
+
+        public async Task<IEnumerable<TResult>> GetAllDevotionals<TResult>()
+        {
+            IEnumerable<TResult> allDevotionals = await requestProvider.GetAsync<IEnumerable<TResult>>(Constants.GetallWPDevotionals);
+            return allDevotionals;
         }
     }
 }

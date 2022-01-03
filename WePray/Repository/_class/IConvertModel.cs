@@ -17,5 +17,6 @@ namespace WePray.Repository._class
         /// </summary>
         /// <returns></returns>
         Task<ObservableCollection<Prayer>> ConvertAllWPResponseObjectToPrayers();
+        Task<ObservableCollection<Prayer>> ConvertAllWPResponseObjectToDevotionals();
     }
 }

@@ -1,63 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:WePray.Views.Ads"
-             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:WePray.Views.Controls" 
+             xmlns:viewmodels="clr-namespace:WePray.ViewModels" 
+             x:DataType="viewmodels:DailyPrayerViewModel"
              x:Class="WePray.Views.DailyPrayer"
-             Title="Daily Prayer"
-             Padding="15"
-             >
+             Title="Daily Prayers"
+             Padding="15">
     <ContentPage.Content>
-        <StackLayout>
-            <!--<SearchBar Placeholder="Search" BackgroundColor="#e7e7e7" TextChanged="SearchBar_TextChanged"/>-->
-            <controls:AdControlView  Size="SmartBannerPortrait" HeightRequest="65"/>
-            <Grid RowDefinitions="8*,*">
-                <ActivityIndicator IsRunning="True" IsVisible="{Binding ActSeen}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Color="Gray"/>
-                <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}" Grid.Row="0">
-                    <CollectionView x:Name="ItemsCollectionView"
-                ItemsSource="{Binding Prayers}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Padding="5">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Image Source="{Binding image}" HeightRequest="50" WidthRequest="70" Grid.Column="0"/>
-
-                                    <StackLayout Padding="10" Grid.Column="1">
-                                        <Label Text="{Binding Title}" 
-                                Style="{StaticResource TitleLabel}" 
-                                FontSize="17" TextType="Html"/>
-                                        <Label TextType="Html" Text="{Binding Description}" 
-                                d:Text="Item descripton"
-                               LineBreakMode="TailTruncation"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
-                                    </StackLayout>
-
-                                    <Label Text="{Binding Date,StringFormat='{0:MMMM dd, yyyy}'}" Grid.Column="2" Padding="10" FontSize="13" Style="{StaticResource DateLabel}"/>
-                                    <BoxView BackgroundColor="#e7e7e7" Grid.Column="1" HeightRequest="1" Grid.Row="1" Grid.ColumnSpan="2"/>
-
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped_1" CommandParameter="{Binding .}"/>
-                                    </Grid.GestureRecognizers>
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </RefreshView>
-                <controls:AdControlView  Size="SmartBannerPortrait" Grid.Row="1"/>
-            </Grid>
-        </StackLayout>
+        <controls:HomePageControl DailyPageType="DailyPrayer" ViewItemSource="{Binding Prayers}"/>
     </ContentPage.Content>
 </ContentPage>
     

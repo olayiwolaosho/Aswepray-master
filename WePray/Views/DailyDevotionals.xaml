@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
+             xmlns:controls="clr-namespace:WePray.Views.Controls" 
+             xmlns:viewmodels="clr-namespace:WePray.ViewModels" 
+             x:DataType="viewmodels:DailyDevotionalViewModel"
+             x:Class="WePray.Views.DailyDevotionals"
+             Title="Daily Devotional">
+    <ContentPage.Content>
+        <controls:HomePageControl DailyPageType="DailyDevotionals" ViewItemSource="{Binding Devotionals}"/>
+    </ContentPage.Content>
+</ContentPage>

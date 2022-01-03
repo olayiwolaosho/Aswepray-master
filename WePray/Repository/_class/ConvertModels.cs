@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WePray.Models;
@@ -22,9 +23,11 @@ namespace WePray.Repository._class
         }
 
         /// <summary>
-        /// Making prayers an observable collection so that no overhead of converting it from one tryp to another when it is returned to the view model
+        /// Making prayers an observable collection so that no overhead of converting it from one type to another when it is returned to the view model
         /// </summary>
         ObservableCollection<Prayer> Prayers = new ObservableCollection<Prayer>();
+
+        ObservableCollection<Prayer> Devotionals = new ObservableCollection<Prayer>();
 
 
         /// <summary>
@@ -32,11 +35,16 @@ namespace WePray.Repository._class
         /// </summary>
         /// <param name="WPObject"></param>
         /// <returns></returns>
-        private ObservableCollection<Prayer> Convert(IEnumerable<WPResponseObject> WPObject)
+        private ObservableCollection<Prayer> Convert(IEnumerable<WPResponseObject> WPObject, ObservableCollection<Prayer> prayerOrDevotional)
         {
+            if (prayerOrDevotional.Any())
+            {
+                prayerOrDevotional.Clear();
+            }
+
             foreach (var item in WPObject)
             {
-                 Prayers.Add(new Prayer
+                prayerOrDevotional.Add(new Prayer
                 {
                     Id = item.Id,
                     Title = item.Title.Rendered,
@@ -45,14 +53,21 @@ namespace WePray.Repository._class
                     Description = HtmlConvert.Gettext(item.Content.Rendered)
                 });
             }
-            return Prayers;
+            return prayerOrDevotional;
         }
 
 
         public async Task<ObservableCollection<Prayer>> ConvertAllWPResponseObjectToPrayers()
         {
             var WPObject = await wPServices.GetAllPrayers<WPResponseObject>();
-            return Convert(WPObject);
+            return Convert(WPObject, Prayers);
+        }
+
+
+        public async Task<ObservableCollection<Prayer>> ConvertAllWPResponseObjectToDevotionals()
+        {
+            var WPObject = await wPServices.GetAllDevotionals<WPResponseObject>();
+            return Convert(WPObject, Devotionals);
         }
 
     }

@@ -50,6 +50,7 @@ namespace WePray.ViewModels
 
         }
 
+        //we use this to get all songs
         private string Getsong(string content)
         {
 

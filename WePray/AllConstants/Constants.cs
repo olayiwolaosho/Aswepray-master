@@ -27,7 +27,8 @@ namespace WePray.AllConstants
         public static string BaseWP_Url = "https://wepray.com.ng/wp-json/";
         public static string GetallWPposts = BaseWP_Url + "wp/v2/posts?context=view&orderby=date";
         public static string GetallWPSongs = BaseWP_Url + "wp/v2/posts?&per_page=20&orderby=date&categories=6";
-        public static string GetallWPPrayers = BaseWP_Url + "wp/v2/posts?&per_page=20&orderby=date&categories=4";
+        public static string GetallWPDevotionals = BaseWP_Url + "wp/v2/posts?&per_page=15&orderby=date&categories=4";
+        public static string GetallWPPrayers = BaseWP_Url + "wp/v2/posts?&per_page=15&orderby=date&categories=20";
 
 
         /// <summary>

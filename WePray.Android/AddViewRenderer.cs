@@ -1,5 +1,7 @@
 ﻿using Android.Content;
 using Android.Gms.Ads;
+using Android.Graphics;
+using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
@@ -64,21 +66,30 @@ namespace WePray.Droid
         {
             Android.Views.IWindowManager windowManager = Context.GetSystemService(Context.WindowService).JavaCast<Android.Views.IWindowManager>();
 
-            var display = windowManager.DefaultDisplay;
+            int widthPixels = getScreenWidth(windowManager);
 
-            var outMetrics = new DisplayMetrics();
+            return AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(Context, widthPixels);
+        }
 
-            display.GetMetrics(outMetrics);
-
-            float density = outMetrics.Density;
-
-            float widthPixels = outMetrics.WidthPixels;
-
-            int adWidth = (int)(widthPixels / density);
-
-             return AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(Context, adWidth);
-
-        } 
+        public static int getScreenWidth(IWindowManager windowManager)
+        {
+            if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.R)
+            {
+                WindowMetrics windowMetrics = windowManager.CurrentWindowMetrics;
+                Insets insets = windowMetrics.WindowInsets
+                        .GetInsetsIgnoringVisibility(WindowInsets.Type.SystemBars());
+                return windowMetrics.Bounds.Width() - insets.Left - insets.Right;
+            }
+            else
+            {
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+#pragma warning disable CS0618 // Type or member is obsolete
+                windowManager.DefaultDisplay.GetMetrics(displayMetrics);
+#pragma warning restore CS0618 // Type or member is obsolete
+                float density = displayMetrics.Density;
+                return (int)(displayMetrics.WidthPixels / density);
+            }
+        }
     }
 }  
   

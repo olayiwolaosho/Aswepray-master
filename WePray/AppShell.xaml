@@ -32,8 +32,13 @@
 
     <!-- Your Pages -->
     <TabBar>
-        <Tab Title="Daily Prayers" Icon="pray.png">
+        <Tab Title="Daily Prayers" 
+             Icon="pray.png">
             <ShellContent ContentTemplate="{DataTemplate local:DailyPrayer}" />
+        </Tab>
+        <Tab Title="Daily Devotionals" 
+             Icon="tab_feed.png">
+            <ShellContent ContentTemplate="{DataTemplate local:DailyDevotionals}" />
         </Tab>
         <!--<Tab Title="Bible" Icon="bible.png">
             <ShellContent ContentTemplate="{DataTemplate local:BibleDetailPage}"/>

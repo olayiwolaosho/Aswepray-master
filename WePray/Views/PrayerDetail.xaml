@@ -14,16 +14,16 @@
     
     <ContentPage.Content>
         <AbsoluteLayout>
-           
+
             <StackLayout Padding="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                <ImageButton Source="{Binding Image}" HeightRequest="110" WidthRequest="110" BackgroundColor="Transparent"/>
-                <Label Text="{Binding Title,Mode=TwoWay}" TextColor="Black"  FontSize="30" Style="{StaticResource TitleLabel}" HorizontalTextAlignment="Center"/>
-                <BoxView HeightRequest="1" BackgroundColor="#e7e7e7" Margin="-20,5"/>
-                <Label Text="{Binding strDate}" TextColor="Black"  FontSize="15" Style="{StaticResource DateLabel}" HorizontalTextAlignment="End" Margin="0,0,0,5"/>
                 <ScrollView>
                     <StackLayout>
+                        <ImageButton Source="{Binding Image}" HeightRequest="90" WidthRequest="90" BackgroundColor="Transparent"/>
+                        <Label Text="{Binding Title,Mode=TwoWay}" TextColor="Black"  FontSize="30" Style="{StaticResource TitleLabel}" HorizontalTextAlignment="Center"/>
+                        <BoxView HeightRequest="1" BackgroundColor="#e7e7e7" Margin="-20,5"/>
+                        <Label Text="{Binding strDate}" TextColor="Black"  FontSize="15" Style="{StaticResource DateLabel}" HorizontalTextAlignment="End" Margin="0,0,0,5"/>
                         <Label Text="{Binding Description, Mode=TwoWay}" TextType="Html" TextColor="Black" FontSize="21" Style="{StaticResource otherLabel}" LineHeight="1.5" FormattedText="{Binding Format, Mode=TwoWay}"/>
-                        <controls:AdControlView  Size="SmartBannerPortrait" HeightRequest="75"/>
+                            <controls:AdControlView  Size="SmartBannerPortrait" HeightRequest="75"/>
                         <controls:AdControlView  Size="SmartBannerPortrait" HeightRequest="75"/>
                     </StackLayout>
                 </ScrollView>

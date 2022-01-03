@@ -13,6 +13,10 @@ using Xamarin.Forms.Xaml;
 
 namespace WePray.Views
 {
+    /// <summary>
+    /// This is actuall daily devotionals what was i thinking when i named it 
+    /// Page that shows all devotionals
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DailyPrayer : ContentPage
     {
@@ -28,7 +32,7 @@ namespace WePray.Views
         }
 
         /// <summary>
-        /// Get all prayers when the content page appears to reduce the amonut of work being don on page creation this helps the smoth app flow 
+        /// Get all Devotionals when the content page appears to reduce the amonut of work being don on page creation this helps the smoothness app flow 
         /// </summary>
         protected async override void OnAppearing()
         {
@@ -58,7 +62,7 @@ namespace WePray.Views
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ItemsCollectionView.ItemsSource = DPVM.Prayers.Where(c => c.Title.ToUpper().Contains(e.NewTextValue) || c.Title.ToLower().Contains(e.NewTextValue));
+           // ItemsCollectionView.ItemsSource = DPVM.Prayers.Where(c => c.Title.ToUpper().Contains(e.NewTextValue) || c.Title.ToLower().Contains(e.NewTextValue));
         }
     }
 }

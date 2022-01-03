@@ -12,7 +12,17 @@ namespace WePray.Repository
     /// </summary>
     public interface IRepository
     {
+        /// <summary>
+        /// This actually gets all devotionals (wrong naming)
+        /// </summary>
+        /// <returns></returns>
         Task<ObservableCollection<Prayer>> GetAllPrayersFromDatabase();
+
+        /// <summary>
+        ///  This gets all the prayers from word press
+        /// </summary>
+        /// <returns></returns>
+        Task<ObservableCollection<Prayer>> GetAllDevotionalsFromDatabase();
 
         /// <summary>
         /// I'm using this for refresh it would get data from wordpress and store it in db

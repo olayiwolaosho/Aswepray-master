@@ -4,6 +4,7 @@ using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
@@ -24,11 +25,14 @@ namespace WePray.ViewModels
 {
     class DailyPrayerViewModel : BaseViewModel
     {
+        INavigation navigation;
+
+        IWPServices wPServices;
+
         ObservableCollection<Prayer> prayers = new ObservableCollection<Prayer>();
         public ObservableCollection<Prayer> Prayers { get => prayers; set => SetProperty(ref prayers,value); }
 
-        INavigation navigation;
-        IWPServices wPServices;
+       
         
         public DailyPrayerViewModel(IConnection connection, IRepository repository) : base(connection,repository)
         {
@@ -93,6 +97,7 @@ namespace WePray.ViewModels
                 }
                 catch(Exception e)
                 {
+                    Debug.WriteLine(e.Message);
                     ActSeen = false;
                     await Application.Current.MainPage.DisplayAlert("No internet connection", "Please connect to the internet", "ok");
                 }

@@ -39,7 +39,7 @@ namespace WePray.Droid
             //This handles the background task and the repeating even when app is killed
             PeriodicWorkRequest taxWorkRequest = PeriodicWorkRequest.Builder.From<NotifyWorker>(TimeSpan.FromMilliseconds(timeinmilliseconds)).Build();
 
-            WorkManager.GetInstance(this).Enqueue(taxWorkRequest);
+         //   WorkManager.GetInstance(this).Enqueue(taxWorkRequest);
 
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

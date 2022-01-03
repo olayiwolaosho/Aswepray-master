@@ -11,6 +11,7 @@ namespace WePray.Services.WordPressServices
         Task<TResult> GetAllPosts<TResult>();
         Task<IEnumerable<TResult>> GetAllSongs<TResult>();
         Task<IEnumerable<TResult>> GetAllPrayers<TResult>();
+        Task<IEnumerable<TResult>> GetAllDevotionals<TResult>();
         Task<TResult> GetTagName<TResult>();
     }
 }
