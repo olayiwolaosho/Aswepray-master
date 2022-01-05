@@ -12,6 +12,7 @@
             <controls:AdControlView  
                 Size="SmartBannerPortrait" 
                 HeightRequest="65"/>
+            
             <Grid RowDefinitions="8*,*">
                 <ActivityIndicator 
                     IsRunning="True" 
@@ -20,6 +21,7 @@
                     HorizontalOptions="Center" 
                     VerticalOptions="Center" 
                     Color="Gray"/>
+                
                 <RefreshView 
                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}" 
                     Command="{Binding LoadItemsCommand}" 
@@ -54,6 +56,7 @@
                                             Style="{StaticResource TitleLabel}" 
                                             FontSize="17" 
                                             TextType="Html"/>
+                                        
                                         <Label 
                                             TextType="Html" 
                                             Text="{Binding Description}" 
@@ -87,6 +90,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </RefreshView>
+                
                 <controls:AdControlView  
                     Size="SmartBannerPortrait" 
                     Grid.Row="1"/>

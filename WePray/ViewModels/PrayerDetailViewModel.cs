@@ -20,6 +20,9 @@ namespace WePray.ViewModels
         string[] strList;
         string content;
         int a = 0;
+
+
+
         public PrayerDetailViewModel(IConnection connection, IRepository repository) : base(connection, repository)
         {
             if (Preferences.ContainsKey("jsnstr"))
@@ -28,6 +31,8 @@ namespace WePray.ViewModels
                 PerformOperation(content);
             }
         }
+
+
 
         string title = "";
 

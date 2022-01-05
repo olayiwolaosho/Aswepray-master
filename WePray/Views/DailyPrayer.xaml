@@ -6,8 +6,7 @@
              xmlns:viewmodels="clr-namespace:WePray.ViewModels" 
              x:DataType="viewmodels:DailyPrayerViewModel"
              x:Class="WePray.Views.DailyPrayer"
-             Title="Daily Prayers"
-             Padding="15">
+             Title="Daily Prayers">
     <ContentPage.Content>
         <controls:HomePageControl DailyPageType="DailyPrayer" ViewItemSource="{Binding Prayers}"/>
     </ContentPage.Content>
