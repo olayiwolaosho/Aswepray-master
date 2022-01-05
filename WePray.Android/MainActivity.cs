@@ -39,7 +39,7 @@ namespace WePray.Droid
             var repeatTime = TimeSpan.FromMilliseconds(timeinmilliseconds);
 
             //This handles the background task and the repeating even when app is killed
-            PeriodicWorkRequest taxWorkRequest = (PeriodicWorkRequest) PeriodicWorkRequest.Builder.From<NotifyWorker>(24, Java.Util.Concurrent.TimeUnit.Hours).SetInitialDelay(24, Java.Util.Concurrent.TimeUnit.Hours).Build();
+            PeriodicWorkRequest taxWorkRequest = (PeriodicWorkRequest) PeriodicWorkRequest.Builder.From<NotifyWorker>(timeinmilliseconds, Java.Util.Concurrent.TimeUnit.Milliseconds).SetInitialDelay(timeinmilliseconds, Java.Util.Concurrent.TimeUnit.Milliseconds).Build();
 
             WorkManager.GetInstance(Android.App.Application.Context).Enqueue(taxWorkRequest);
 

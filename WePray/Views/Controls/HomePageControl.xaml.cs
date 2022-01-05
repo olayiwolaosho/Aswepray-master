@@ -52,7 +52,7 @@ namespace WePray.Views.Controls
             var item = (Prayer)layout.BindingContext;
             var jsn = JsonConvert.SerializeObject(item);
             Preferences.Set("jsnstr", jsn);
-            await Shell.Current.GoToAsync($"{nameof(PrayerDetail)}");
+            await Shell.Current.GoToAsync($"{nameof(PrayerDetail)}?pageTitle={DailyPageType}");
         }
     }
 }

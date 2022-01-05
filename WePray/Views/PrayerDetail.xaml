@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="clr-namespace:WePray.Views.Ads"
              mc:Ignorable="d"
              x:Class="WePray.Views.PrayerDetail"
-             Title="Prayer">
+             x:Name="detailsPage">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior 

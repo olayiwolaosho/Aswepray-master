@@ -14,20 +14,38 @@ namespace WePray.Views
 {
    
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    
+    [QueryProperty(nameof(pageTitle), "pageTitle")]
     public partial class PrayerDetail : ContentPage
     {
-        PrayerDetailViewModel PDVM; 
+        PrayerDetailViewModel PDVM;
+
+        public string pageTitle
+        {
+            set
+            {
+                SetPageTitle(value);
+            }
+        }
+
+
+
         public PrayerDetail()
         {
             InitializeComponent();
             BindingContext = PDVM = Resolver.Resolve<PrayerDetailViewModel>();
         }
 
+
         protected override bool OnBackButtonPressed()
         {
             PDVM.stopAudio();
             return base.OnBackButtonPressed();
+        }
+
+
+        public void SetPageTitle(string pageTitle)
+		{
+            detailsPage.Title = pageTitle;
         }
     }
 }
